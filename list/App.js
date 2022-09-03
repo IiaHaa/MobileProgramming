@@ -3,30 +3,41 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Button, TextInput, Text, FlatList } from 'react-native';
 
 export default function App() {
-  const [text, setText] = useState('');
-  const [data, setData] = useState([]);
+  const [item, setItem] = useState("");
+  const [list, setList] = useState([]);
 
-  const buttonPressed = () => {
-    const newData = [...data, {key: text}];
-    setData(newData);
-    setText('');
-  }
+  const add = () => {
+    const listItem = [...list, {key: item}]
+    console.log(listItem);
+    setList(listItem);
+    setItem("");
+  };
 
-return (
-  <View style={styles.container}>
-    <Text>Testi</Text>
-    <TextInput style={styles.input} onChangeText={text => setText(text)} value={text} />
-    <Button title="Press me" onPress={buttonPressed} />
+  const clear = () => { 
+    setList([]);
+    setItem("");
+  };
 
-    <FlatList
-      style={styles.list}
-      data={data}
-      renderItem={ ({item}) => <Text>{item.key}</Text>}
-      keyExtractor={(item, index) => index.toString()}
-    />
-    <StatusBar style="auto" />
-  </View>
-);
+  return (
+    <View style={styles.container}>
+        <TextInput style={styles.input} onChangeText={item => setItem(item)} value={item} />
+        <View style={{ flexDirection: 'row', marginTop: 10}}>
+          <View style={{ marginRight: 10}}>
+          <Button onPress={add} title="Add" />
+          </View>
+          <View>
+          <Button onPress={clear} title="Clear" />
+          </View>
+        </View>
+        <Text style={styles.list}>Shopping List</Text>
+        <FlatList
+          data={list}
+          renderItem={ ({item}) => <Text>{item.key}</Text> }
+          keyExtractor={ (item, index) => index.toString()}
+        />
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -35,22 +46,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '30%'
-  },
-  title: {
-    fontSize: 18
+    marginTop: '20%'
   },
   input: {
-    width: '60%', 
+    width:200  , 
     borderColor: 'gray', 
     borderWidth: 1,
-    margin: 10,
-    fontSize: 16
+    margin: 5
   },
   list: {
-    marginTop: '10%',
+    marginTop: '10%'
   }
 });
-// tunnel
-// npx expo start
-//// <Button title ="-" onPress{() => Calculate('-') } />
