@@ -29,7 +29,7 @@ export default function App() {
           <Button onPress={clear} title="Clear" />
           </View>
         </View>
-        <Text style={styles.list}>Shopping List</Text>
+        <Text style={styles.title}>Shopping List</Text>
         <FlatList
           data={list}
           renderItem={ ({item}) => <Text>{item.key}</Text> }
@@ -54,7 +54,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 5
   },
-  list: {
-    marginTop: '10%'
+  title: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: '10%',
+    marginBottom: 5
   }
 });
