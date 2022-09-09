@@ -13,11 +13,6 @@ export default function App() {
     setItem("");
   };
 
-  const clear = () => { 
-    setList([]);
-    setItem("");
-  };
-
   return (
     <View style={styles.container}>
         <TextInput style={styles.input} onChangeText={item => setItem(item)} value={item} />
@@ -26,7 +21,7 @@ export default function App() {
           <Button onPress={add} title="Add" />
           </View>
           <View>
-          <Button onPress={clear} title="Clear" />
+          <Button onPress={() => setList([])} title="Clear" />
           </View>
         </View>
         <Text style={styles.title}>Shopping List</Text>
